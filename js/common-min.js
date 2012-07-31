@@ -1,0 +1,1 @@
+jQuery(document).ready(function(a){if(a("#pan-pan-pan-slide").size()>0){a("#pan-pan-pan-slide").tabs({fx:{opacity:"toggle",duration:"normal"}}).tabs("rotate",7000,true).tabs("option","event","click")}a("#pan-pan-pan-slide li a").click(function(){return false})});

@@ -1,0 +1,41 @@
+@charset "utf-8";
+#pan-pan-pan-slide {
+	width: 640px;
+	height: 250px;
+	margin-bottom:  9px;
+	background: #FFF;
+	position: relative;
+}
+#pan-pan-pan-slide ul.ui-tabs-nav {
+	width: 640px;
+	background: #6C615D;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+}
+#pan-pan-pan-slide ul.ui-tabs-nav li {
+	float: left;
+}
+#pan-pan-pan-slide ul.ui-tabs-nav li a {
+	color: #FFF;
+	text-decoration: none;
+	margin-left: 1px;
+	border: 1px solid #ACA19D;
+	padding: 3px 10px;
+	display: block;
+}
+
+#pan-pan-pan-slide .ui-tabs-hide {
+	display: none;
+}
+
+#pan-pan-pan-slide ul.ui-tabs-nav:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+#pan-pan-pan-slide ul.ui-tabs-nav {
+	/zoom: 1;
+}
+

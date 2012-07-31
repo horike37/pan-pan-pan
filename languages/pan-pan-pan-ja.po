@@ -1,0 +1,380 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Biteki Slide\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-30 19:57+0900\n"
+"PO-Revision-Date: 2012-07-30 19:57+0900\n"
+"Last-Translator: \n"
+"Language-Team: the Megumi team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: pan-pan-pan.php:49
+#: pan-pan-pan.php:50
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: pan-pan-pan.php:51
+#, php-format
+msgid "Add New %s"
+msgstr "%s を新規追加"
+
+#: pan-pan-pan.php:52
+#, php-format
+msgid "Edit %s"
+msgstr "%s を編集"
+
+#: pan-pan-pan.php:53
+#, php-format
+msgid "New %s"
+msgstr "%s を新規投稿"
+
+#: pan-pan-pan.php:54
+#, php-format
+msgid "View %s"
+msgstr "%s を表示"
+
+#: pan-pan-pan.php:55
+#, php-format
+msgid "Search %s"
+msgstr "%s を検索"
+
+#: pan-pan-pan.php:56
+#, php-format
+msgid "No %s found."
+msgstr "%s が見つかりませんでした。"
+
+#: pan-pan-pan.php:57
+#, php-format
+msgid "No %s found in Trash."
+msgstr "ゴミ箱内に %s が見つかりませんでした。"
+
+#: pan-pan-pan.php:97
+msgid "Slide Links"
+msgstr "スライドリンク"
+
+#: pan-pan-pan.php:106
+msgid "Link : "
+msgstr "リンク : "
+
+#: pan-pan-pan.php:108
+msgid "Open link in a new window/tab"
+msgstr ""
+
+#~ msgid "Target service"
+#~ msgstr "対象サービス"
+
+#~ msgid "Period of time"
+#~ msgstr "期間"
+
+#~ msgid "Ad"
+#~ msgstr "広告用Widget(タイトル無しなので他のにも利用可)"
+
+#~ msgid "Ad Widget"
+#~ msgstr "広告用Widget"
+
+#~ msgid "news"
+#~ msgstr "news"
+
+#~ msgid "Menu, Coupon"
+#~ msgstr "メニュー・クーポン"
+
+#~ msgid "menu-coupon"
+#~ msgstr "menu-coupon"
+
+#~ msgid "Access"
+#~ msgstr "アクセス"
+
+#~ msgid "access"
+#~ msgstr "access"
+
+#~ msgid "Reserve"
+#~ msgstr "ご予約"
+
+#~ msgid "Length"
+#~ msgstr "長さ"
+
+#~ msgid "length"
+#~ msgstr "length"
+
+#~ msgid "All"
+#~ msgstr "すべて"
+
+#~ msgid "all-length"
+#~ msgstr "all-length"
+
+#~ msgid "Medium"
+#~ msgstr "ミディアム"
+
+#~ msgid "medium"
+#~ msgstr "medium"
+
+#~ msgid "Short"
+#~ msgstr "ショート"
+
+#~ msgid "short"
+#~ msgstr "short"
+
+#~ msgid "Semi"
+#~ msgstr "セミロング"
+
+#~ msgid "semi"
+#~ msgstr "semi"
+
+#~ msgid "Long"
+#~ msgstr "ロング"
+
+#~ msgid "long"
+#~ msgstr "long"
+
+#~ msgid "Bery Short"
+#~ msgstr "ベリーショート"
+
+#~ msgid "beryshort"
+#~ msgstr "beryshort"
+
+#~ msgid "Hair Set"
+#~ msgstr "ヘアセット"
+
+#~ msgid "hairset"
+#~ msgstr "hairset"
+
+#~ msgid "Mrs"
+#~ msgstr "ミセス"
+
+#~ msgid "ms"
+#~ msgstr "ms"
+
+#~ msgid "Color"
+#~ msgstr "カラー"
+
+#~ msgid "color"
+#~ msgstr "color"
+
+#~ msgid "all-color"
+#~ msgstr "all-color"
+
+#~ msgid "Brown, Beige"
+#~ msgstr "ブラウン・ベージュ系"
+
+#~ msgid "brown"
+#~ msgstr "brown"
+
+#~ msgid "Yellow, Orange"
+#~ msgstr "イエロー・オレンジ系"
+
+#~ msgid "yellow"
+#~ msgstr "yellow"
+
+#~ msgid "Red, Pink"
+#~ msgstr "レッド・ピンク系"
+
+#~ msgid "red"
+#~ msgstr "red"
+
+#~ msgid "Ash, Black"
+#~ msgstr "アッシュ・ブラック系"
+
+#~ msgid "ash"
+#~ msgstr "ash"
+
+#~ msgid "Other Color"
+#~ msgstr "その他カラー"
+
+#~ msgid "other-color"
+#~ msgstr "other-color"
+
+#~ msgid "Image"
+#~ msgstr "イメージ"
+
+#~ msgid "image"
+#~ msgstr "image"
+
+#~ msgid "Natural"
+#~ msgstr "ナチュラル"
+
+#~ msgid "natural"
+#~ msgstr "natural"
+
+#~ msgid "Office, Conservative"
+#~ msgstr "オフィス・コンサバ"
+
+#~ msgid "office"
+#~ msgstr "office"
+
+#~ msgid "Mote, Loved"
+#~ msgstr "モテ・愛され"
+
+#~ msgid "mote"
+#~ msgstr "mote"
+
+#~ msgid "GAL"
+#~ msgstr "ギャル"
+
+#~ msgid "gal"
+#~ msgstr "gal"
+
+#~ msgid "Casual, Street"
+#~ msgstr "カジュアル・ストリート"
+
+#~ msgid "casual"
+#~ msgstr "casual"
+
+#~ msgid "Teens, Gurley"
+#~ msgstr "ティーンズ・ガーリー"
+
+#~ msgid "teen"
+#~ msgstr "teen"
+
+#~ msgid "Menu"
+#~ msgstr "メニュー内容"
+
+#~ msgid "menu"
+#~ msgstr "menu"
+
+#~ msgid "Perm"
+#~ msgstr "パーマ"
+
+#~ msgid "perm"
+#~ msgstr "perm"
+
+#~ msgid "Straight perms"
+#~ msgstr "ストレートパーマ・縮毛矯正"
+
+#~ msgid "straight"
+#~ msgstr "straight"
+
+#~ msgid "Exte"
+#~ msgstr "エクステ"
+
+#~ msgid "exte"
+#~ msgstr "exte"
+
+#~ msgid "Volume"
+#~ msgstr "髪量"
+
+#~ msgid "volume"
+#~ msgstr "volume"
+
+#~ msgid "Low"
+#~ msgstr "少ない"
+
+#~ msgid "low"
+#~ msgstr "low"
+
+#~ msgid "Average"
+#~ msgstr "普通"
+
+#~ msgid "average-volume"
+#~ msgstr "average-volume"
+
+#~ msgid "Much"
+#~ msgstr "多い"
+
+#~ msgid "much"
+#~ msgstr "much"
+
+#~ msgid "Texture"
+#~ msgstr "髪質"
+
+#~ msgid "texture"
+#~ msgstr "texture"
+
+#~ msgid "Soft"
+#~ msgstr "柔かい"
+
+#~ msgid "soft-texture"
+#~ msgstr "soft-texture"
+
+#~ msgid "average-texture"
+#~ msgstr "average-texture"
+
+#~ msgid "Hard"
+#~ msgstr "硬い"
+
+#~ msgid "hard-texture"
+#~ msgstr "hard-texture"
+
+#~ msgid "Thickness"
+#~ msgstr "太さ"
+
+#~ msgid "thickness"
+#~ msgstr "thickness"
+
+#~ msgid "Thick"
+#~ msgstr "細い"
+
+#~ msgid "thick"
+#~ msgstr "thick"
+
+#~ msgid "average-thickness"
+#~ msgstr "average-thickness"
+
+#~ msgid "Fine"
+#~ msgstr "太い"
+
+#~ msgid "fine"
+#~ msgstr "fine"
+
+#~ msgid "Curly"
+#~ msgstr "クセ"
+
+#~ msgid "curly"
+#~ msgstr "curly"
+
+#~ msgid "None"
+#~ msgstr "なし"
+
+#~ msgid "none-curly"
+#~ msgstr "none-curly"
+
+#~ msgid "soft-curly"
+#~ msgstr "soft-curly"
+
+#~ msgid "hard-curly"
+#~ msgstr "hard-curly"
+
+#~ msgid "Face"
+#~ msgstr "顔型"
+
+#~ msgid "face"
+#~ msgstr "face"
+
+#~ msgid "Circle"
+#~ msgstr "丸型"
+
+#~ msgid "circle"
+#~ msgstr "circle"
+
+#~ msgid "Oval"
+#~ msgstr "卵型"
+
+#~ msgid "oval"
+#~ msgstr "oval"
+
+#~ msgid "Square"
+#~ msgstr "四角"
+
+#~ msgid "square"
+#~ msgstr "square"
+
+#~ msgid "Triangle"
+#~ msgstr "逆三角"
+
+#~ msgid "triangle"
+#~ msgstr "triangle"
+
+#~ msgid "Base"
+#~ msgstr "ベース"
+
+#~ msgid "base"
+#~ msgstr "base"
