@@ -1,9 +1,9 @@
 <?php
 
 /*
-  Plugin Name: Carousel（Pan Pan Pan）
+  Plugin Name: Carousel（Original by Pan Pan Pan）
   Version: 0.1
-  Plugin URI:
+  Plugin URI: https://github.com/gatespace/pan-pan-pan/
   Description: スライドショー用のプラグイン (Original by Webnist, horike37)
   Author: gatespace (Original by Webnist, horike37)
   Author URI: http://gatespace.wordpress.com/
@@ -140,7 +140,7 @@ function panpanpan_get_slide_post( $limit = -1 ) {
 					$blank = '';
 				}
 				$output .= '<div id="fragment-' . $count . '" class="ui-tabs-panel">';
-				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></a>';
+				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></p>';
 				$output .= '</div>' . "\n";
 			}
 			$count = 0;
