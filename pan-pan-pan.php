@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Carousel（Pan Pan Pan）
-  Version: 0.7.1.0
+  Version: 0.1
   Plugin URI:
   Description: スライドショー用のプラグイン (Original by Webnist, horike37)
   Author: gatespace (Original by Webnist, horike37)
