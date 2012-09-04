@@ -116,44 +116,46 @@ function pan_pan_pan_link_save( $post_id ) {
 
 //テーマで呼び出す関数
 function panpanpan_get_slide_post( $limit = -1 ) {
-	$output = '';
-	$posts_array = array( );
-	$args = array(
-		'post_type' => 'pan-pan-pan',
-		'posts_per_page' => $limit,
-		'orderby' => 'menu_order',
-		'order' => 'ASC',
-	);
-	$posts_array = get_posts( $args );
-	if ( $posts_array ) {
-		$count = 0;
-		$output .= '<div id="pan-pan-pan-slide">' . "\n";
-		foreach ( $posts_array as $post ) {
-			setup_postdata( $post );
-			$count++;
-			$image = get_the_post_thumbnail( $post->ID, 'pan-pan-pan-slide' );
-			$slide_link = esc_url( get_post_meta( $post->ID, '_slide_link', true ) );
-			if ( (int) get_post_meta( $post->ID, '_slide_blank', true ) ) {
-				$blank = ' target="_blank"';
-			} else {
-				$blank = '';
+	if ( is_home() || is_front_page() ) {
+		$output = '';
+		$posts_array = array( );
+		$args = array(
+			'post_type' => 'pan-pan-pan',
+			'posts_per_page' => $limit,
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
+		);
+		$posts_array = get_posts( $args );
+		if ( $posts_array ) {
+			$count = 0;
+			$output .= '<div id="pan-pan-pan-slide">' . "\n";
+			foreach ( $posts_array as $post ) {
+				setup_postdata( $post );
+				$count++;
+				$image = get_the_post_thumbnail( $post->ID, 'pan-pan-pan-slide' );
+				$slide_link = esc_url( get_post_meta( $post->ID, '_slide_link', true ) );
+				if ( (int) get_post_meta( $post->ID, '_slide_blank', true ) ) {
+					$blank = ' target="_blank"';
+				} else {
+					$blank = '';
+				}
+				$output .= '<div id="fragment-' . $count . '" class="ui-tabs-panel">';
+				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></a>';
+				$output .= '</div>' . "\n";
 			}
-			$output .= '<div id="fragment-' . $count . '" class="ui-tabs-panel">';
-			$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></a>';
+			$count = 0;
+			$output .= '<ul class="ui-tabs-nav">' . "\n";
+			foreach ( $posts_array as $post ) {
+				setup_postdata( $post );
+				$count++;
+				$title = get_the_title( $post->ID );
+				$output .= '<li class="ui-tabs-nav-item" id="nav-fragment-' . $count . '"><a href="#fragment-' . $count . '">' . $title . '</a></li>';
+			}
+			$output .= '</ul>' . "\n";
 			$output .= '</div>' . "\n";
+			return $output;
 		}
-		$count = 0;
-		$output .= '<ul class="ui-tabs-nav">' . "\n";
-		foreach ( $posts_array as $post ) {
-			setup_postdata( $post );
-			$count++;
-			$title = get_the_title( $post->ID );
-			$output .= '<li class="ui-tabs-nav-item" id="nav-fragment-' . $count . '"><a href="#fragment-' . $count . '">' . $title . '</a></li>';
-		}
-		$output .= '</ul>' . "\n";
-		$output .= '</div>' . "\n";
 	}
-	return $output;
 }
 
 /*
