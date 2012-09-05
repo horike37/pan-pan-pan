@@ -1,12 +1,12 @@
 <?php
 
 /*
-  Plugin Name: Pan Pan Pan
-  Version: 0.7.1.0
-  Plugin URI:
-  Description:
-  Author: Webnist, horike37
-  Author URI: http://webni.st
+  Plugin Name: Carousel（Original by Pan Pan Pan）
+  Version: 0.1
+  Plugin URI: https://github.com/gatespace/pan-pan-pan/
+  Description: スライドショー用のプラグイン (Original by Webnist, horike37)
+  Author: gatespace (Original by Webnist, horike37)
+  Author URI: http://gatespace.wordpress.com/
   License: GPLv2 or later
  */
 
@@ -20,27 +20,24 @@ if ( ! defined( 'PANPANPAN_PLUGIN_DIR' ) )
 add_action( 'init', 'panpanpan_create_initial_post_types' );
 function panpanpan_create_initial_post_types() {
 	$labels = array(
-		'name' => sprintf( __( '%s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'singular_name' => sprintf( __( '%s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'add_new_item' => sprintf( __( 'Add New %s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'edit_item' => sprintf( __( 'Edit %s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'new_item' => sprintf( __( 'New %s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'view_item' => sprintf( __( 'View %s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'search_items' => sprintf( __( 'Search %s', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'not_found' => sprintf( __( 'No %s found.', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
-		'not_found_in_trash' => sprintf( __( 'No %s found in Trash.', 'panpanpan' ), __( 'Pan Pan Pan', 'panpanpan' ) ),
+		'name' => sprintf( __( '%s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'singular_name' => sprintf( __( '%s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'add_new_item' => sprintf( __( 'Add New %s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'edit_item' => sprintf( __( 'Edit %s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'new_item' => sprintf( __( 'New %s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'view_item' => sprintf( __( 'View %s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'search_items' => sprintf( __( 'Search %s', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'not_found' => sprintf( __( 'No %s found.', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
+		'not_found_in_trash' => sprintf( __( 'No %s found in Trash.', 'panpanpan' ), __( 'Carousel', 'panpanpan' ) ),
 	);
 	$args = array(
 		'labels' => $labels,
-		'public' => true,
-		'exclude_from_search' => true,
+		'public' => false, // false ; show_ui=false, publicly_queryable=false, exclude_from_search=true, show_in_nav_menus=false
 		'show_ui' => true,
 		'capability_type' => 'post',
 		'hierarchical' => false,
 		'supports' => array( 'title', 'thumbnail', 'page-attributes' ),
-		'rewrite' => array( 'slug' => 'pan-pan-pan', 'with_front' => false ),
-		'query_var' => 'pan-pan-pan',
-		'has_archive' => false,
+		'rewrite' => false,
 	);
 	register_post_type( 'pan-pan-pan', $args );
 }
@@ -64,7 +61,7 @@ function panpanpan_add_slide_js() {
 
 
 //画像のサイズ指定
-add_image_size( 'pan-pan-pan-slide', 640, 250, true );
+add_image_size( 'pan-pan-pan-slide', 700, 300, true );
 
 
 //メタボックスの追加
@@ -143,7 +140,7 @@ function panpanpan_get_slide_post( $limit = -1 ) {
 					$blank = '';
 				}
 				$output .= '<div id="fragment-' . $count . '" class="ui-tabs-panel">';
-				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></a>';
+				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></p>';
 				$output .= '</div>' . "\n";
 			}
 			$count = 0;
@@ -160,3 +157,70 @@ function panpanpan_get_slide_post( $limit = -1 ) {
 		}
 	}
 }
+
+/*
+ * 管理画面の一覧にサムネイルと順番を表示
+ * 参照　http://www.warna.info/archives/1661/
+ * 参照　http://www.webopixel.net/wordpress/167.html
+ */
+
+// カラムを追加
+function panpanpan_manage_posts_columns( $posts_columns ) {
+	$new_columns = array();
+	foreach ( $posts_columns as $column_name => $column_display_name ) {
+		if ( $column_name == 'date' ) {
+			$new_columns['thumbnail'] = __('Thumbnail');
+			$new_columns['order'] = __( 'Order' );
+			add_action( 'manage_posts_custom_column', 'panpanpan_add_column', 10, 2 );
+		}
+		$new_columns[$column_name] = $column_display_name;
+	}
+	return $new_columns;
+
+}
+
+// 追加したカラムの中身
+function panpanpan_add_column($column_name, $post_id) {
+	$post_id = (int)$post_id;
+
+	// アイキャッチ
+	if ( $column_name == 'thumbnail') {
+		$thum = ( get_the_post_thumbnail( $post_id, array(50,50), 'thumbnail' ) ) ? get_the_post_thumbnail( $post_id, array(50,50), 'thumbnail' ) : __('None') ;
+		echo $thum;
+	}
+
+	// 順序
+	if ( $column_name == 'order' ) {
+		$post = get_post( $post_id );
+		echo $post->menu_order;
+	}
+}
+
+// 追加したカラムのスタイルシート
+function panpanpan_add_menu_order_column_styles() {
+	if ('pan-pan-pan' == get_post_type()) {
+		
+?>
+<style type="text/css" charset="utf-8">
+.fixed .column-thumbnail {
+	width: 10%;
+}
+.fixed .column-order {
+	width: 7%;
+	text-align: center;
+}
+</style>
+<?php
+	}
+}
+
+// 順序でソートできるように
+function add_menu_order_sortable_column( $sortable_column ) {
+	$sortable_column['order'] = 'menu_order';
+	return $sortable_column;
+}
+
+add_filter( 'manage_pan-pan-pan_posts_columns', 'panpanpan_manage_posts_columns' );
+add_action( 'admin_print_styles-edit.php', 'panpanpan_add_menu_order_column_styles' );
+add_filter( 'manage_edit-pan-pan-pan_sortable_columns', 'add_menu_order_sortable_column' );
+
