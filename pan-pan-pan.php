@@ -54,14 +54,14 @@ function panpanpan_add_slide_style() {
 add_action( 'wp_print_scripts', 'panpanpan_add_slide_js' );
 function panpanpan_add_slide_js() {
 	if ( !is_admin() && (is_home() || is_front_page() ) ) {
-		wp_enqueue_script( 'jquery-ui-tabs' );
-		wp_enqueue_script( 'pan-pan-pan-common', PANPANPAN_PLUGIN_URL . '/js/common-min.js', array( 'jquery' ), '0.7.1.0', true );
+		wp_enqueue_script( 'pan-pan-pan-flexslider', PANPANPAN_PLUGIN_URL . '/js/jquery.flexslider-min.js', array( 'jquery' ), '0.7.1.0', true );
+		wp_enqueue_script( 'pan-pan-pan-common', PANPANPAN_PLUGIN_URL . '/js/common.min.js', array( 'jquery' ), '0.7.1.0', true );
 	}
 }
 
 
 //画像のサイズ指定
-add_image_size( 'pan-pan-pan-slide', 700, 300, true );
+add_image_size( 'pan-pan-pan-slide', 768, 384, true );
 
 
 //メタボックスの追加
@@ -128,7 +128,8 @@ function panpanpan_get_slide_post( $limit = -1 ) {
 		$posts_array = get_posts( $args );
 		if ( $posts_array ) {
 			$count = 0;
-			$output .= '<div id="pan-pan-pan-slide">' . "\n";
+			$output .= '<div class="flexslider">' . "\n";
+			$output .= '<ul  class="slides">' . "\n";
 			foreach ( $posts_array as $post ) {
 				setup_postdata( $post );
 				$count++;
@@ -139,24 +140,23 @@ function panpanpan_get_slide_post( $limit = -1 ) {
 				} else {
 					$blank = '';
 				}
-				$output .= '<div id="fragment-' . $count . '" class="ui-tabs-panel">';
-				$output .= '<p class="thumb"><a href="' . $slide_link . '"' . $blank . '>' . $image . '</a></p>';
-				$output .= '</div>' . "\n";
+				$output .= '<li id="fragment-' . $count . '" class="ui-tabs-panel">';
+				$output .= '<a  style="line-height: 1.714285714; font-size: 1rem;" href="' . $slide_link . '"' . $blank . '>' . $image . '</a>';
+				$output .= '</li>' . "\n";
 			}
 			$count = 0;
-			$output .= '<ul class="ui-tabs-nav">' . "\n";
-			foreach ( $posts_array as $post ) {
-				setup_postdata( $post );
-				$count++;
-				$title = get_the_title( $post->ID );
-				$output .= '<li class="ui-tabs-nav-item" id="nav-fragment-' . $count . '"><a href="#fragment-' . $count . '">' . $title . '</a></li>';
-			}
+
 			$output .= '</ul>' . "\n";
 			$output .= '</div>' . "\n";
 			return $output;
 		}
 	}
 }
+
+function panpanpan_show_slide() {
+	return panpanpan_get_slide_post();
+}
+add_shortcode( 'mlp_show_slide', 'panpanpan_show_slide' );
 
 /*
  * 管理画面の一覧にサムネイルと順番を表示
@@ -224,3 +224,84 @@ add_filter( 'manage_pan-pan-pan_posts_columns', 'panpanpan_manage_posts_columns'
 add_action( 'admin_print_styles-edit.php', 'panpanpan_add_menu_order_column_styles' );
 add_filter( 'manage_edit-pan-pan-pan_sortable_columns', 'add_menu_order_sortable_column' );
 
+add_action( 'admin_menu', 'panpanpan_admin_menu' );
+
+function panpanpan_admin_menu() {
+	add_options_page( __( 'Carousel 設定' ), __( 'Carousel 設定' ), 'manage_options', 'pan_pan_pan', 'pan_pan_pan_options_page');
+}
+
+function pan_pan_pan_options_page() {
+?>
+<div class="wrap">
+<?php screen_icon(); ?>
+
+<h2><?php _e( 'Carousel 設定' ); ?></h2>
+
+<form action="options.php" method="post">
+<?php settings_fields( 'pan_pan_pan_options' ); ?>
+<?php do_settings_sections( 'pan_pan_pan' ); ?>
+
+<p class="submit"><input name="Submit" type="submit" value="<?php _e( 'save' ) ?>" class="button-primary" /></p>
+</form>
+
+</div>
+<?php
+}
+
+add_action( 'admin_init', 'pan_pan_pan_admin_init' );
+
+function pan_pan_pan_admin_init() {
+	register_setting( 'pan_pan_pan_options', 'pan_pan_pan_options', 'pan_pan_pan_options_validate' );
+
+	add_settings_section( 'pan_pan_pan_main', __( '設定' ), 'pan_pan_pan_section_text', 'pan_pan_pan' );
+
+	add_settings_field( 'pan_pan_pan_slideshowSpeed', __( 'slideshowSpeed' ), 'pan_pan_pan_setting_slideshowSpeed',
+		'pan_pan_pan', 'pan_pan_pan_main' );
+
+	add_settings_field( 'pan_pan_pan_animationSpeed', __( 'animationSpeed' ), 'pan_pan_pan_setting_animationSpeed',
+		'pan_pan_pan', 'pan_pan_pan_main' );
+
+}
+
+function pan_pan_pan_section_text() {
+}
+
+function pan_pan_pan_setting_slideshowSpeed() {
+	$options = get_option( 'pan_pan_pan_options' );
+	$options['slideshowSpeed'] = $options['slideshowSpeed'] != '' ? $options['slideshowSpeed'] : 7000;
+
+	echo '<input id="pan_pan_pan_slideshowSpeed" name="pan_pan_pan_options[slideshowSpeed]" size="40" type="text" value="' . esc_attr( $options['slideshowSpeed'] ) . '" /> second';
+}
+
+function pan_pan_pan_setting_animationSpeed() {
+	$options = get_option( 'pan_pan_pan_options' );
+	$options['animationSpeed'] = $options['animationSpeed'] != '' ? $options['animationSpeed'] : 600;
+
+	echo '<input id="pan_pan_pan_animationSpeed" name="pan_pan_pan_options[animationSpeed]" size="40" type="text" value="' . esc_attr( $options['animationSpeed'] ) . '" /> second';
+}
+
+function pan_pan_pan_options_validate( $input ) {
+	$newinput['slideshowSpeed'] = absint( $input['slideshowSpeed'] );
+	$newinput['animationSpeed'] = absint( $input['animationSpeed'] );
+
+	return $newinput;
+}
+
+add_action( 'wp_footer', 'panpanpan_wp_footer' );
+function panpanpan_wp_footer(){
+	if ( is_home() || is_front_page() ) {
+		$options = get_option( 'pan_pan_pan_options' );
+		$slideshowSpeed = $options['slideshowSpeed'] != '' ? $options['slideshowSpeed'] : 7000;
+		$animationSpeed = $options['animationSpeed'] != '' ? $options['animationSpeed'] : 600;
+?>
+	<script type="text/javascript">
+		var slide_conf = {
+			slideshowSpeed : <?php echo $slideshowSpeed; ?>,
+			animationSpeed : <?php echo $animationSpeed; ?>
+		}
+	</script>
+<?php
+	}
+}
+
+?>
